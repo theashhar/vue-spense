@@ -14,16 +14,23 @@ import IncomeExpense from "./components/IncomeExpense.vue";
 import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 
 const toast = useToast()
+
+onMounted(() => {
+const saveTransactions  = JSON.parse(localStorage.getItem('transactions'))
+
+if(saveTransactions){
+  transactions.value = saveTransactions
+}
+})
 
 const transactions = ref([
   { id: 1, text: "Your First Transaction", amount: 1000 },
 
 ]);
-// console.log("Transct",transactions.value)
 
 // Get Total
 const total = computed(() => {
@@ -46,7 +53,7 @@ const expenses = computed(() => {
   .toFixed(2);
 });
 
-// Add transaction
+// Add transaction 👍
 const handleTransactionSubmitted = (transactionData) => {
   transactions.value.push({
     id: Date.now(), // Generates a unique timestamp-based id
@@ -54,6 +61,8 @@ const handleTransactionSubmitted = (transactionData) => {
     amount: transactionData.amount,
   });
   toast.success('Transaction added successfully')
+
+  saveTransactionsToLocalStorage()
 }
 
 //Delete transaction
@@ -61,7 +70,12 @@ const handleTransactionDeleted = (id) => {
   console.log(id)
   transactions.value = transactions.value.filter(transaction => transaction.id !== id);
   toast('Transaction deleted successfully')
-  // transactions.value.pop();
+
+  saveTransactionsToLocalStorage()
 }
 
+//Saving to local storage ✊
+const saveTransactionsToLocalStorage = () => {
+  localStorage.setItem('transactions', JSON.stringify(transactions.value))
+}
 </script>
