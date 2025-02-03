@@ -2,6 +2,13 @@
 
 :root {
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --primary-color: #9c88ff;
+  --success-color: #2ecc71;
+  --danger-color: #c0392b;
+  --warning-color: #f1c40f;
+  --background-color: #f7f7f7;
+  --text-color: #333;
+  --border-color: #dedede;
 }
 
 * {
@@ -9,7 +16,7 @@
 }
 
 body {
-  background-color: #f7f7f7;
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,12 +25,18 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size: 18px;
+  color: var(--text-color);
 }
 
 .container {
   margin: 30px auto;
   width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
 }
+
 @media (max-width: 768px) {
   .container {
     width: 95%; /* Adjust width for smaller screens */
@@ -35,24 +48,33 @@ body {
     width: 100%; /* Full width for very small screens */
   }
 }
+
 h1 {
   letter-spacing: 1px;
   margin: 0;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  /* text-align: center; */
 }
 
 h3 {
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 10px;
   margin: 40px 0 10px;
+  font-size: 1.5rem;
 }
 
 h4 {
   margin: 0;
   text-transform: uppercase;
+  font-size: 1.2rem;
 }
+
 h5 {
   margin: 0;
   text-transform: uppercase;
+  font-size: 1rem;
+  color: #777;
 }
 
 .inc-exp-container {
@@ -62,7 +84,7 @@ h5 {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
-  /* width: 600; */
+  border-radius: 8px;
 }
 
 .inc-exp-container > div {
@@ -71,53 +93,67 @@ h5 {
 }
 
 .inc-exp-container > div:first-of-type {
-  border-right: 1px solid #dedede;
+  border-right: 1px solid var(--border-color);
 }
 
 .money {
-  font-size: 16px;
-  /* letter-spacing: 1px; */
+  font-size: 20px;
+  font-weight: bold;
   margin: 5px 0;
 }
 
 .money.plus {
-  color: #2ecc71;
+  color: var(--success-color);
 }
 
 .money.minus {
-  color: #c0392b;
+  color: var(--danger-color);
 }
 
 label {
   display: inline-block;
   margin: 10px 0;
+  font-weight: bold;
 }
 
 input[type='text'],
 input[type='number'] {
-  border: 1px solid #dedede;
-  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   display: block;
   font-size: 16px;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+input[type='text']:focus,
+input[type='number']:focus {
+  border-color: var(--primary-color);
+  outline: none;
 }
 
 .btn {
   cursor: pointer;
-  background-color: #9c88ff;
+  background-color: var(--primary-color);
   box-shadow: var(--box-shadow);
   color: #fff;
   border: 0;
   display: block;
   font-size: 16px;
   margin: 10px 0 30px;
-  padding: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   width: 100%;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.btn:focus,
-.delete-btn:focus {
+.btn:hover {
+  background-color: darken(var(--primary-color), 10%);
+}
+
+.btn:focus {
   outline: 0;
 }
 
@@ -130,36 +166,48 @@ input[type='number'] {
 .list li {
   background-color: #fff;
   box-shadow: var(--box-shadow);
-  color: #333;
+  color: var(--text-color);
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 10px;
+  padding: 15px;
   margin: 10px 0;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .list li.plus {
-  border-right: 5px solid #2ecc71;
+  border-right: 5px solid var(--success-color);
 }
 
 .list li.minus {
-  border-right: 5px solid #c0392b;
+  border-right: 5px solid var(--danger-color);
 }
 
 .delete-btn {
   cursor: pointer;
-  background-color: #e74c3c;
+  background-color: var(--danger-color);
   border: 0;
   color: #fff;
   font-size: 20px;
   line-height: 20px;
-  padding: 2px 5px;
+  padding: 5px 10px;
   position: absolute;
   top: 50%;
   left: 0;
   transform: translate(-100%, -50%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  /* background-color: darken(var(--danger-color), 10%); */
 }
 
 .list li:hover .delete-btn {
