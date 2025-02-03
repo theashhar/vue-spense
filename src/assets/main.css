@@ -22,9 +22,19 @@ body {
 
 .container {
   margin: 30px auto;
-  width: 400px;
+  width: 800px;
+}
+@media (max-width: 768px) {
+  .container {
+    width: 95%; /* Adjust width for smaller screens */
+  }
 }
 
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Full width for very small screens */
+  }
+}
 h1 {
   letter-spacing: 1px;
   margin: 0;
@@ -40,6 +50,10 @@ h4 {
   margin: 0;
   text-transform: uppercase;
 }
+h5 {
+  margin: 0;
+  text-transform: uppercase;
+}
 
 .inc-exp-container {
   background-color: #fff;
@@ -48,6 +62,7 @@ h4 {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
+  /* width: 600; */
 }
 
 .inc-exp-container > div {
@@ -60,8 +75,8 @@ h4 {
 }
 
 .money {
-  font-size: 20px;
-  letter-spacing: 1px;
+  font-size: 16px;
+  /* letter-spacing: 1px; */
   margin: 5px 0;
 }
 
