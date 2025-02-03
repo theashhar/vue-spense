@@ -1,22 +1,30 @@
-<script>
+<template>
+<Header />
+<Balance :totalBalance = total />
+<IncomeExpense />
+<TransationList :transactions = "transactions" />
+<AddTransaction />
+</template>
+
+<script setup>
 import Header from './components/Header.vue';
 import Balance from './components/Balance.vue';
 import IncomeExpense from './components/IncomeExpense.vue';
 import TransationList from './components/TransationList.vue';
-export default {
-  components: {
-    Header,
-    Balance,
-    IncomeExpense,
-    TransationList,
-  }
-}
-</script>
+import AddTransaction from './components/AddTransaction.vue';
 
-<template>
-<!-- My App -->
-<Header />
-<Balance />
-<IncomeExpense />
-<TransationList />
-</template>
+import { ref, computed } from 'vue';
+
+const transactions = ref([
+  { id: 1, text: "Flower", amount: -120 },
+  { id: 2, text: "Salary", amount: 800000 },
+  { id: 3, text: "Book", amount: -1100 },
+  { id: 4, text: "Camera", amount: 15000 },
+]); 
+console.log("Transct",transactions.value)
+
+const total = computed(() => {
+  return transactions.value.reduce((acc, item) => (acc += item.amount), 0);
+});
+
+</script>
