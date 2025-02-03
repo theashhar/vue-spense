@@ -3,7 +3,7 @@
   <Balance :totalBalance="total" />
   <!-- plus is added to make them numbers, since bydefault they becam strings -->
   <IncomeExpense :income="+income" :expenses="+expenses" />
-  <TransactionList :transactions="transactions" />
+  <TransactionList :transactions="transactions" @transactionDeleted="handleTransactionDeleted" />
   <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
 </template>
 
@@ -20,10 +20,8 @@ import { useToast } from "vue-toastification";
 const toast = useToast()
 
 const transactions = ref([
-  { id: 1, text: "Flower", amount: -120 },
-  { id: 2, text: "Salary", amount: 800000 },
-  { id: 3, text: "Book", amount: -1100 },
-  { id: 4, text: "Camera", amount: 15000 },
+  { id: 1, text: "Your First Transaction", amount: 1000 },
+
 ]);
 // console.log("Transct",transactions.value)
 
@@ -47,6 +45,8 @@ const expenses = computed(() => {
   .reduce((acc, item) => (acc += item.amount), 0)
   .toFixed(2);
 });
+
+// Add transaction
 const handleTransactionSubmitted = (transactionData) => {
   transactions.value.push({
     id: Date.now(), // Generates a unique timestamp-based id
@@ -54,6 +54,14 @@ const handleTransactionSubmitted = (transactionData) => {
     amount: transactionData.amount,
   });
   toast.success('Transaction added successfully')
+}
+
+//Delete transaction
+const handleTransactionDeleted = (id) => {
+  console.log(id)
+  transactions.value = transactions.value.filter(transaction => transaction.id !== id);
+  toast('Transaction deleted successfully')
+  // transactions.value.pop();
 }
 
 </script>

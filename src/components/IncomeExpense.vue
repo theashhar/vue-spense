@@ -2,11 +2,11 @@
   <div class="inc-exp-container">
     <div>
       <h5>Income</h5>
-      <p id="money-plus" class="money plus">+₹ {{income}}</p>
+      <p id="money-plus" class="money plus">₹ {{income}}</p>
     </div>
     <div>
       <h5>Expense</h5>
-      <p id="money-minus" class="money minus">-₹ {{expenses}}</p>
+      <p id="money-minus" class="money minus">₹ {{expenses}}</p>
     </div>
   </div>
 </template>
