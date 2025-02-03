@@ -1,10 +1,17 @@
 <template>
   <Header />
   <Balance :totalBalance="total" />
-  <!-- plus is added to make them numbers, since bydefault they becam strings -->
+  <!-- plus is added to make them numbers, since by default they become strings -->
   <IncomeExpense :income="+income" :expenses="+expenses" />
   <TransactionList :transactions="transactions" @transactionDeleted="handleTransactionDeleted" />
   <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
+
+  <!-- Footer with heart and GitHub link -->
+  <footer class="footer">
+    <p>Made with ❤️ by 
+      <a href="https://github.com/theashhar" target="_blank" class="footer-link"> theAshhar</a>
+    </p>
+  </footer>
 </template>
 
 <script setup>
